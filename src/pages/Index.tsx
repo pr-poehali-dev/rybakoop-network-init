@@ -85,7 +85,7 @@ const Index = () => {
           <div className="absolute bottom-20 right-20 w-72 h-72 bg-cyan-300/30 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1.5s'}}></div>
           <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-300/20 rounded-full blur-3xl animate-pulse" style={{animationDelay: '3s'}}></div>
         </div>
-        <Card className={`w-full max-w-md p-8 ${theme === 'dark' ? 'bg-[#252837] border-[#2d3142]' : 'bg-white border-gray-200'} transition-colors duration-300`}>
+        <Card className={`relative z-10 w-full max-w-md p-8 ${theme === 'dark' ? 'bg-[#252837]/95 border-[#2d3142] backdrop-blur-xl' : 'bg-white/95 border-gray-200 backdrop-blur-xl'} transition-all duration-300 shadow-2xl`}>
           <div className="flex justify-between items-center mb-8">
             <div className="flex items-center gap-3">
               <div className="text-4xl">🎣</div>
@@ -94,14 +94,16 @@ const Index = () => {
                 <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>Сообщество рыбаков</p>
               </div>
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
+            <button
               onClick={toggleTheme}
-              className="rounded-full"
+              className={`relative w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
+                theme === 'dark'
+                  ? 'bg-gradient-to-br from-amber-400 to-orange-500 shadow-lg shadow-amber-500/30 hover:shadow-amber-500/50'
+                  : 'bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50'
+              } hover:scale-110 active:scale-95`}
             >
-              <Icon name={theme === 'dark' ? 'Sun' : 'Moon'} size={20} />
-            </Button>
+              <Icon name={theme === 'dark' ? 'Sun' : 'Moon'} size={18} className="text-white" />
+            </button>
           </div>
 
           <div className={`flex gap-1 mb-6 p-1 rounded-2xl ${theme === 'dark' ? 'bg-[#1a1d2e]' : 'bg-gray-100'}`}>
