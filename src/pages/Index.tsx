@@ -88,21 +88,35 @@ const Index = () => {
             </Button>
           </div>
 
-          <div className="flex gap-2 mb-6">
-            <Button
+          <div className={`flex gap-1 mb-6 p-1 rounded-2xl ${theme === 'dark' ? 'bg-[#1a1d2e]' : 'bg-gray-100'}`}>
+            <button
               onClick={() => setIsLogin(true)}
-              variant={isLogin ? 'default' : 'ghost'}
-              className="flex-1 rounded-full"
+              className={`flex-1 py-2.5 rounded-xl font-medium transition-all duration-200 ${
+                isLogin
+                  ? theme === 'dark'
+                    ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg shadow-cyan-500/30'
+                    : 'bg-white text-gray-900 shadow-sm'
+                  : theme === 'dark'
+                  ? 'text-gray-400 hover:text-gray-300'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
             >
               Вход
-            </Button>
-            <Button
+            </button>
+            <button
               onClick={() => setIsLogin(false)}
-              variant={!isLogin ? 'default' : 'ghost'}
-              className="flex-1 rounded-full"
+              className={`flex-1 py-2.5 rounded-xl font-medium transition-all duration-200 ${
+                !isLogin
+                  ? theme === 'dark'
+                    ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg shadow-cyan-500/30'
+                    : 'bg-white text-gray-900 shadow-sm'
+                  : theme === 'dark'
+                  ? 'text-gray-400 hover:text-gray-300'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
             >
               Регистрация
-            </Button>
+            </button>
           </div>
 
           <div className="space-y-4">
@@ -122,9 +136,12 @@ const Index = () => {
                 className={`${theme === 'dark' ? 'bg-[#1a1d2e] border-[#2d3142] text-white placeholder:text-gray-500' : 'bg-gray-50'} rounded-xl`}
               />
             )}
-            <Button onClick={handleAuth} className="w-full rounded-xl h-12 text-base font-semibold">
+            <button
+              onClick={handleAuth}
+              className="w-full h-12 rounded-xl text-base font-semibold bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white shadow-lg shadow-cyan-500/30 transition-all duration-200 hover:shadow-cyan-500/50 hover:scale-[1.02] active:scale-[0.98]"
+            >
               {isLogin ? 'Войти' : 'Зарегистрироваться'}
-            </Button>
+            </button>
           </div>
         </Card>
       </div>
@@ -200,13 +217,23 @@ const Index = () => {
                   className={`mb-3 min-h-[100px] ${theme === 'dark' ? 'bg-[#1a1d2e] border-[#2d3142] text-white placeholder:text-gray-500' : 'bg-gray-50'} rounded-xl`}
                 />
                 <div className="flex gap-2">
-                  <Button onClick={handlePost} className="flex-1 rounded-xl">
-                    <Icon name="Send" size={16} className="mr-2" />
+                  <button
+                    onClick={handlePost}
+                    className="flex-1 py-2.5 rounded-xl font-medium bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white shadow-md shadow-cyan-500/20 transition-all duration-200 hover:shadow-cyan-500/40 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
+                  >
+                    <Icon name="Send" size={16} />
                     Опубликовать
-                  </Button>
-                  <Button onClick={() => setShowNewPost(false)} variant="outline" className={`${theme === 'dark' ? 'border-[#2d3142]' : ''} rounded-xl`}>
+                  </button>
+                  <button
+                    onClick={() => setShowNewPost(false)}
+                    className={`px-5 py-2.5 rounded-xl font-medium transition-all duration-200 ${
+                      theme === 'dark'
+                        ? 'bg-[#1a1d2e] hover:bg-[#2d3142] text-gray-300 border border-[#2d3142]'
+                        : 'bg-gray-100 hover:bg-gray-200 text-gray-700 border border-gray-200'
+                    } hover:scale-105 active:scale-95`}
+                  >
                     Отмена
-                  </Button>
+                  </button>
                 </div>
               </Card>
             )}
@@ -264,17 +291,17 @@ const Index = () => {
                   </div>
                   <p className={`font-semibold mb-1 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>{friend.name}</p>
                   <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'} mb-3`}>{friend.status}</p>
-                  <Button size="sm" className="w-full rounded-xl">
-                    <Icon name="UserPlus" size={16} className="mr-2" />
+                  <button className="w-full py-2 px-3 rounded-xl text-sm font-medium bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white shadow-md shadow-cyan-500/20 transition-all duration-200 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 flex items-center justify-center gap-1.5">
+                    <Icon name="UserPlus" size={16} />
                     Добавить
-                  </Button>
+                  </button>
                 </Card>
               ))}
             </div>
 
-            <Button className="w-full rounded-xl h-12 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
+            <button className="w-full h-12 rounded-xl font-semibold bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg shadow-purple-500/30 transition-all duration-200 hover:shadow-purple-500/50 hover:scale-[1.02] active:scale-[0.98]">
               Найти ещё рыбаков
-            </Button>
+            </button>
           </div>
         )}
 
@@ -304,10 +331,14 @@ const Index = () => {
                 </div>
               </div>
 
-              <Button variant="outline" className={`w-full rounded-xl ${theme === 'dark' ? 'border-[#2d3142]' : ''}`}>
-                <Icon name="Edit" size={16} className="mr-2" />
+              <button className={`w-full py-3 px-4 rounded-xl font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
+                theme === 'dark'
+                  ? 'bg-[#1a1d2e] hover:bg-[#252837] text-gray-200 border border-[#2d3142]'
+                  : 'bg-gray-50 hover:bg-gray-100 text-gray-900 border border-gray-200'
+              } hover:scale-[1.02] active:scale-[0.98]`}>
+                <Icon name="Edit" size={16} />
                 Редактировать профиль
-              </Button>
+              </button>
             </Card>
 
             <Card className={`p-4 ${theme === 'dark' ? 'bg-[#252837] border-[#2d3142]' : 'bg-white border-gray-200'} transition-colors duration-300`}>
@@ -326,44 +357,64 @@ const Index = () => {
 
       <div className={`fixed bottom-0 left-0 right-0 ${theme === 'dark' ? 'bg-[#252837]' : 'bg-white'} border-t ${theme === 'dark' ? 'border-[#2d3142]' : 'border-gray-200'} transition-colors duration-300`}>
         <div className="max-w-2xl mx-auto px-4 py-3 flex items-center justify-around">
-          <Button
-            variant="ghost"
-            size="icon"
+          <button
             onClick={() => setScreen('feed')}
-            className={`rounded-full ${screen === 'feed' ? 'text-primary' : theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}
+            className={`relative transition-all duration-200 ${
+              screen === 'feed'
+                ? 'text-cyan-500'
+                : theme === 'dark'
+                ? 'text-gray-400 hover:text-gray-300'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
           >
             <Icon name="Home" size={24} />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
+            {screen === 'feed' && (
+              <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-cyan-500"></div>
+            )}
+          </button>
+          <button
             onClick={() => setScreen('friends')}
-            className={`rounded-full ${screen === 'friends' ? 'text-primary' : theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}
+            className={`relative transition-all duration-200 ${
+              screen === 'friends'
+                ? 'text-cyan-500'
+                : theme === 'dark'
+                ? 'text-gray-400 hover:text-gray-300'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
           >
             <Icon name="Users" size={24} />
-          </Button>
-          <Button
-            size="icon"
+            {screen === 'friends' && (
+              <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-cyan-500"></div>
+            )}
+          </button>
+          <button
             onClick={() => setShowNewPost(true)}
-            className="rounded-full w-14 h-14 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600"
+            className="w-14 h-14 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white shadow-lg shadow-cyan-500/30 transition-all duration-200 hover:shadow-cyan-500/50 hover:scale-110 active:scale-95 flex items-center justify-center"
           >
             <Icon name="Plus" size={28} />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            className={`rounded-full ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}
+          </button>
+          <button
+            className={`transition-all duration-200 ${
+              theme === 'dark' ? 'text-gray-400 hover:text-gray-300' : 'text-gray-600 hover:text-gray-900'
+            }`}
           >
             <Icon name="MessageSquare" size={24} />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
+          </button>
+          <button
             onClick={() => setScreen('profile')}
-            className={`rounded-full ${screen === 'profile' ? 'text-primary' : theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}
+            className={`relative transition-all duration-200 ${
+              screen === 'profile'
+                ? 'text-cyan-500'
+                : theme === 'dark'
+                ? 'text-gray-400 hover:text-gray-300'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
           >
             <Icon name="User" size={24} />
-          </Button>
+            {screen === 'profile' && (
+              <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-cyan-500"></div>
+            )}
+          </button>
         </div>
       </div>
     </div>
