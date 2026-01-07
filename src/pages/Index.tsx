@@ -5,8 +5,9 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import Icon from '@/components/ui/icon';
 import { useToast } from '@/hooks/use-toast';
-
-type Screen = 'auth' | 'feed' | 'friends' | 'profile';
+import Sidebar from '@/components/Sidebar';
+import Chat from '@/components/Chat';
+import type { Screen, User } from '@/types';
 
 const Index = () => {
   const [screen, setScreen] = useState<Screen>('auth');
@@ -14,6 +15,8 @@ const Index = () => {
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
   const [postText, setPostText] = useState('');
   const [showNewPost, setShowNewPost] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
   const { toast } = useToast();
 
   const toggleTheme = () => {
@@ -22,6 +25,17 @@ const Index = () => {
   };
 
   const handleAuth = () => {
+    const mockUser: User = {
+      id: 1,
+      email: 'test@test.ru',
+      username: 'Рыболов',
+      avatar_url: '',
+      experience_years: 5,
+      total_catches: 42,
+      rating: 850,
+      created_at: new Date().toISOString(),
+    };
+    setCurrentUser(mockUser);
     toast({ title: 'Добро пожаловать в РыбаКоп!' });
     setScreen('feed');
   };
@@ -183,10 +197,26 @@ const Index = () => {
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-300/20 rounded-full blur-3xl animate-blob"></div>
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-300/20 rounded-full blur-3xl animate-blob" style={{animationDelay: '3s'}}></div>
       </div>
+      <Sidebar
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        user={currentUser}
+        currentScreen={screen}
+        onNavigate={setScreen}
+        theme={theme}
+      />
       <div className="relative z-10">
       <div className={`sticky top-0 z-10 ${theme === 'dark' ? 'bg-[#252837]' : 'bg-white'} border-b ${theme === 'dark' ? 'border-[#2d3142]' : 'border-gray-200'} transition-colors duration-300`}>
         <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setSidebarOpen(true)}
+              className="rounded-full"
+            >
+              <Icon name="Menu" size={20} />
+            </Button>
             <div className="text-2xl">🎣</div>
             <div>
               <h1 className={`text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>РыбаКоп</h1>
@@ -218,6 +248,9 @@ const Index = () => {
         </div>
       </div>
 
+      {screen === 'chat' ? (
+        <Chat theme={theme} user={currentUser} />
+      ) : (
       <div className="max-w-2xl mx-auto p-4">
         {screen === 'feed' && (
           <div className="space-y-4">
@@ -390,7 +423,9 @@ const Index = () => {
           </div>
         )}
       </div>
+      )}
 
+      {screen !== 'chat' && (
       <div className={`fixed bottom-0 left-0 right-0 ${theme === 'dark' ? 'bg-[#252837]' : 'bg-white'} border-t ${theme === 'dark' ? 'border-[#2d3142]' : 'border-gray-200'} transition-colors duration-300`}>
         <div className="max-w-2xl mx-auto px-4 py-3 flex items-center justify-around">
           <button
@@ -453,6 +488,7 @@ const Index = () => {
           </button>
         </div>
       </div>
+      )}
       </div>
     </div>
   );
