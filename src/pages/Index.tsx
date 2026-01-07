@@ -68,7 +68,23 @@ const Index = () => {
 
   if (screen === 'auth') {
     return (
-      <div className={`min-h-screen ${theme === 'dark' ? 'bg-[#1a1d2e]' : 'bg-gradient-to-br from-blue-50 to-cyan-50'} flex items-center justify-center p-4 transition-colors duration-300`}>
+      <div className="min-h-screen relative flex items-center justify-center p-4 overflow-hidden">
+        <div className={`absolute inset-0 transition-opacity duration-500 ${
+          theme === 'dark' ? 'opacity-100' : 'opacity-0'
+        }`}>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] animate-gradient"></div>
+          <div className="absolute top-0 -left-20 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-0 -right-20 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+        </div>
+        <div className={`absolute inset-0 transition-opacity duration-500 ${
+          theme === 'dark' ? 'opacity-0' : 'opacity-100'
+        }`}>
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-cyan-50 to-purple-50 animate-gradient"></div>
+          <div className="absolute top-20 left-20 w-72 h-72 bg-blue-300/30 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-20 w-72 h-72 bg-cyan-300/30 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1.5s'}}></div>
+          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-300/20 rounded-full blur-3xl animate-pulse" style={{animationDelay: '3s'}}></div>
+        </div>
         <Card className={`w-full max-w-md p-8 ${theme === 'dark' ? 'bg-[#252837] border-[#2d3142]' : 'bg-white border-gray-200'} transition-colors duration-300`}>
           <div className="flex justify-between items-center mb-8">
             <div className="flex items-center gap-3">
@@ -149,7 +165,23 @@ const Index = () => {
   }
 
   return (
-    <div className={`min-h-screen ${theme === 'dark' ? 'bg-[#1a1d2e]' : 'bg-gray-50'} pb-20 transition-colors duration-300`}>
+    <div className="min-h-screen relative pb-20 overflow-hidden">
+      <div className={`absolute inset-0 transition-opacity duration-500 ${
+        theme === 'dark' ? 'opacity-100' : 'opacity-0'
+      }`}>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] animate-gradient"></div>
+        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-3xl animate-blob"></div>
+        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-3xl animate-blob" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-500/5 rounded-full blur-3xl animate-blob" style={{animationDelay: '4s'}}></div>
+      </div>
+      <div className={`absolute inset-0 transition-opacity duration-500 ${
+        theme === 'dark' ? 'opacity-0' : 'opacity-100'
+      }`}>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-cyan-50 to-purple-50 animate-gradient"></div>
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-300/20 rounded-full blur-3xl animate-blob"></div>
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-300/20 rounded-full blur-3xl animate-blob" style={{animationDelay: '3s'}}></div>
+      </div>
+      <div className="relative z-10">
       <div className={`sticky top-0 z-10 ${theme === 'dark' ? 'bg-[#252837]' : 'bg-white'} border-b ${theme === 'dark' ? 'border-[#2d3142]' : 'border-gray-200'} transition-colors duration-300`}>
         <div className="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -164,14 +196,16 @@ const Index = () => {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="icon"
+            <button
               onClick={toggleTheme}
-              className="rounded-full"
+              className={`relative w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 ${
+                theme === 'dark'
+                  ? 'bg-gradient-to-br from-amber-400 to-orange-500 shadow-lg shadow-amber-500/30 hover:shadow-amber-500/50'
+                  : 'bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50'
+              } hover:scale-110 active:scale-95`}
             >
-              <Icon name={theme === 'dark' ? 'Sun' : 'Moon'} size={20} />
-            </Button>
+              <Icon name={theme === 'dark' ? 'Sun' : 'Moon'} size={16} className="text-white" />
+            </button>
             <Button variant="ghost" size="icon" className="rounded-full">
               <Icon name="Search" size={20} />
             </Button>
@@ -416,6 +450,7 @@ const Index = () => {
             )}
           </button>
         </div>
+      </div>
       </div>
     </div>
   );

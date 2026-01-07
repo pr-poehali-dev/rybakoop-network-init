@@ -84,11 +84,32 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'gradient': {
+					'0%, 100%': {
+						backgroundPosition: '0% 50%'
+					},
+					'50%': {
+						backgroundPosition: '100% 50%'
+					}
+				},
+				'blob': {
+					'0%, 100%': {
+						transform: 'translate(0, 0) scale(1)'
+					},
+					'33%': {
+						transform: 'translate(30px, -50px) scale(1.1)'
+					},
+					'66%': {
+						transform: 'translate(-20px, 20px) scale(0.9)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'gradient': 'gradient 15s ease infinite',
+				'blob': 'blob 7s ease-in-out infinite'
 			}
 		}
 	},
